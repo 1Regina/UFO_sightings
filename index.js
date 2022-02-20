@@ -88,7 +88,6 @@ app.get('/sighting/:index', (req,res) =>{
   });
   });
 
-// BLOCKER_1!! Backslash appearing in fields of edit form.
 // Display the sighting to edit
 app.get('/sighting/:index/edit', (req,res) =>{
 
@@ -97,8 +96,12 @@ app.get('/sighting/:index/edit', (req,res) =>{
    console.error(`read error`, error);
    return;
    }
-  const {index} = req.params
-  const oneSighting = jsonObjContent.sightings[req.params.index];
+  const {index} = req.params // req.params is an object..destructuring
+  console.log(`type of req.params`, typeof req.params)
+  console.log(req.params)
+  console.log(`type of index`, typeof index)
+  console.log(index)
+  const oneSighting = jsonObjContent.sightings[index];
   oneSighting.index = index
   const details = {oneSighting}
   console.log(`details`, details);
