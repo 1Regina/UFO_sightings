@@ -1,5 +1,7 @@
 import express from 'express';
-import read, {add} from './jsonFileStorage.js';
+import read, {add, write} from './jsonFileStorage.js';
+import fs from 'fs';
+// import methodOverride from 'method-override';
 
 const app = express();
 app.use(express.static('public'));
@@ -23,6 +25,18 @@ app.get(`/`, (req, res) => {
     const numOfRecords = {index : data.length};
     res.render(`listing`, numOfRecords); // put in a object so u can use the key-value
     });
+});
+
+app.delete('/sighting/:index/delete', (request, response) => {
+  // Remove element from DB at given index
+  const { index } = request.params;
+  read('data.json', (err, data) => {
+    data['sightings'].splice(index, 1);
+    write('data.json', data, (err) => {
+      const numOfRecords = {index : data.length};
+      response.render('listing',numOfRecords);
+    });
+  });
 });
 
 // COMFORTABLE - redirect to http://localhost:3004/sighting/<INDEX>
@@ -58,7 +72,7 @@ app.post('/sighting', (request, response) => {
     });
 })
 
-
+// Display the sighting selected from listing page
 app.get('/sighting/:index', (req,res) =>{
   read(`data.json`, (error, jsonObjContent) => {
     if (error) {
@@ -74,5 +88,60 @@ app.get('/sighting/:index', (req,res) =>{
   });
   });
 
+// BLOCKER_1!! Backslash appearing in fields of edit form.
+// Display the sighting to edit
+app.get('/sighting/:index/edit', (req,res) =>{
+  read(`data.json`, (error, jsonObjContent) => {
+    if (error) {
+      console.error(`read error`, error);
+      return;
+    }
+    const details = jsonObjContent.sightings[req.params.index];
+    console.log(`details`, details);
+    res.render(`editForm`, {details});
+  });
+});
 
+// BLOCKER_2!! Thunderclient is ok. Cannot route to ("/sighting/:index/")
+app.put('/sighting/:index/edit', (req,res) =>{
+    const {index} = req.params.index;
+    let details = {}
+    read(`data.json`, (error, jsonObjContent) => {
+    if (error) {
+      console.error(`read error`, error);
+      return;
+    };
+
+    jsonObjContent.sightings[index] = req.body;
+    const details = jsonObjContent.sightings[index];
+    write('data.json', jsonObjContent, (err) => {
+    //   // res.send('Done!');
+      res.render(`single_sighting`, {details});
+    //   console.log(`request.body`, req.body)
+    //   // console.log(`index`, index)  
+    });
+    
+  });  
+//     // await fs.promises.writeFile("data.json", JSON.stringify(jsonObjContent),{encoding: 'utf8' })
+//     res.render(`single_sighting`, {details} )
+  
+})
+
+
+// Not relevant as display vs edit form is different in res.render portion
+// const displaySighting = (req, res) => {
+//    console.log(`request came in`)
+//      read(`data.json`, (error, jsonObjContent) => {
+//     if (error) {
+//       console.error(`read error`, error);
+//       return;
+//     }
+//     const details = jsonObjContent.sightings[req.params.index];
+//     console.log(`details`, details);
+//     res.render(`editForm`, {details});
+//   });
+// }
+
+// app.get('/sighting/:index', displaySighting)
+// app.get('/sighting/:index/edit', displaySighting)
 app.listen(port)
