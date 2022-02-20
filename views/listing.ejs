@@ -11,12 +11,12 @@
       <h1>All UFO Sightings</h1>
       <% for(let i=0; i < index; i +=1) { %>
       <ul>
-        <% let url = `/sighting/${i}` %> 
-        <% let text = `Sighting ${i}` %>
+        <% let url = `/sighting/${i}` %> <% let text = `Sighting ${i}` %>
         <a href="<%=url %>"><%=text %></a>
+        <% let delete_id = `delete ${i}` %>
+        <input type="submit" value="Delete" <%=id= delete_id %>/>
       </ul>
-      <%}
-      %>
+      <%} %>
     </div>
   </body>
 </html>
