@@ -91,14 +91,18 @@ app.get('/sighting/:index', (req,res) =>{
 // BLOCKER_1!! Backslash appearing in fields of edit form.
 // Display the sighting to edit
 app.get('/sighting/:index/edit', (req,res) =>{
-  read(`data.json`, (error, jsonObjContent) => {
-    if (error) {
-      console.error(`read error`, error);
-      return;
-    }
-    const details = jsonObjContent.sightings[req.params.index];
-    console.log(`details`, details);
-    res.render(`editForm`, {details});
+
+ read(`data.json`, (error, jsonObjContent) => {
+  if (error) {
+   console.error(`read error`, error);
+   return;
+   }
+  const {index} = req.params
+  const oneSighting = jsonObjContent.sightings[req.params.index];
+  oneSighting.index = index
+  const details = {oneSighting}
+  console.log(`details`, details);
+  res.render(`editForm`, details);
   });
 });
 
