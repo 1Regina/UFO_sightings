@@ -20,10 +20,13 @@ app.get(`/`, (req, res) => {
       console.error (`read error` , error)
       return;
     } 
-    const data = jsonObjContent.sightings;
 
-    const numOfRecords = {index : data.length};
-    res.render(`listing`, numOfRecords); // put in a object so u can use the key-value
+    const data = jsonObjContent.sightings;
+    // put in an object so can use the key-value
+    res.render(`listing`, {data}); 
+
+    // const numOfRecords = {index : data.length};
+    // res.render(`listing`, numOfRecords); // put in a object so u can use the key-value
     });
 });
 
