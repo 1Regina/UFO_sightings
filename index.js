@@ -115,7 +115,6 @@ app.get('/sighting/:index/edit', (req,res) =>{
 // BLOCKER_2!! Thunderclient is ok. Cannot route to ("/sighting/:index/")
 app.put('/sighting/:index/edit', (req,res) =>{
     const {index} = req.params.index;
-    let details = {}
     read(`data.json`, (error, jsonObjContent) => {
     if (error) {
       console.error(`read error`, error);
@@ -154,4 +153,58 @@ app.put('/sighting/:index/edit', (req,res) =>{
 
 // app.get('/sighting/:index', displaySighting)
 // app.get('/sighting/:index/edit', displaySighting)
+
+// BLOCKERS 1a= couldnt get the shapesObj to render in shapes.ejs when manipulation were done there 
+// BLOCKERS 1b = shapeObject not found
+// BLOCKER 1c = sort by shape or sort by count
+// thinking of a counter and object tally
+app.get(`/shapes`, (req, res) => {
+  
+  read(`data.json`, (error, jsonObjContent)=>{
+    let shapeObject = {}
+    if (error){
+    // res.send(404).json(`data does not exist`)
+    res.status(404).send("Data does not exist")
+    // res.send("error in data")
+    }
+    let data = jsonObjContent.sightings
+    console.log(`contents`, data)
+
+    // do the tally in .js instead of shapes.ejs
+    let shapesArray = []
+    for (let i=0; i< data.length; i +=1 ){
+      let shape = data[i].SHAPE
+      shapesArray.push(shape)
+    }
+    shapesArray.forEach(element => {
+      if (!(element in shapesArray)) {
+        shapeObject.shape = 1
+      } else {
+         shapeObject.element +=1
+      }}
+    )
+     
+       res.render(`shapes`, shapeObject)
+
+      // res.send(`shapes`, {data})
+      // doing tally in shapes.ejs -> bring below over
+      // <% let shapeObject ={} %>
+      // <% const index=data.length %>
+      // <% for(let i=0; i < index; i +=1) { %>
+      //   <% let shape=data[i].SHAPE%>
+      //   <% if !(shape in shapeObject) { %>
+      //     <% shapeObject.shape = 1   %> 
+      //     <%} else { %>
+      //     <%  shapeObject.shape +=1  %> 
+      //   <% } %>
+      //    <%} %>
+      //   <%for (const [key, value] of Object.entries(shapeObject)) {%>
+      //   <ul><%=key%>
+      //       <%=value%>
+      //   </ul>
+      //   <%}%>  
+
+  })
+})
+
 app.listen(port)
