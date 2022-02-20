@@ -9,8 +9,15 @@
   <body>
     <div>
       <h1>All UFO Sightings</h1>
+      <%let index=data.length %>
       <% for(let i=0; i < index; i +=1) { %>
       <ul>
+        <% let date=data[i].DATE%>
+        <span><%=date%></span>
+        <% let city=data[i].CITY%>
+        <span><%=city%></span>
+        <% let shape=data[i].SHAPE%>
+        <span style="color:turquoise" ><%=shape%> </span>
         <% let url = `/sighting/${i}` %> <% let text = `Sighting ${i}` %>
         <a href="<%=url %>"><%=text %></a>
         <% let delete_id = `delete ${i}` %>
