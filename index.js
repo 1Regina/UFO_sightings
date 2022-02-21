@@ -182,11 +182,12 @@ app.get(`/shapes`, (req, res) => {
          shapeObject.element +=1
       }}
     )
+ 
     // sort by values
-    // shapeObject.sort(function (a, b) {
-    //   return a.value - b.value;
-    // });
-    res.render(`shapes`, shapeObject)
+    shapeObject.sort(function (a, b) {
+      return a.value - b.value;
+    });
+    res.render(`shapes`, {shapeObject})
 
       // res.send(`shapes`, {data})
       // doing tally in shapes.ejs -> bring below over
