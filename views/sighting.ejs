@@ -8,14 +8,6 @@
   </head>
   <body>
     <form action="/sighting" method="POST">
-      <label for="year">Year:</label><br />
-      <input type="text" id="year" name="YEAR" /><br />
-      <label for="season">Season:</label><br />
-      <input type="text" id="season" name="SEASON" /><br />
-      <label for="month">Month:</label><br />
-      <input type="text" id="month" name="MONTH" /><br />
-      <label for="day_of_month">Day of Month:</label><br />
-      <input type="text" id="day_of_month" name="DAY_OF_MONTH" /><br />
       <label for="date">Date:</label><br />
       <input type="date" id="date" name="DATE" required /><br />     
       <label for="shape">Shape:</label><br />
@@ -30,10 +22,8 @@
       <input type="text" id="location_details" name="LOCATION_DETAILS" /><br />
       <label for="nearest_town">Nearest Town:</label><br />
       <input type="text" id="nearest_town" name="NEAREST_TOWN" /><br />
-      <label for="shape">Shape:</label><br />
-      <input type="text" id="shape" name="Shape" /><br />
       <label for="observed">Observed:</label><br />
-      <textarea id="observed" rows="10" cols="70" name="OBSERVED">Enter your observation here...</textarea><br />
+      <textarea id="observed" rows="10" cols="70" name="OBSERVED">Enter your observation here...required </textarea><br />
       <label for="also_noticed">Also Noticed:</label><br />
       <input type="text" id="also_noticed" name="ALSO_NOTICED" /><br />
       <label for="other_witnesses">Other Witnesses:</label><br />
@@ -48,10 +38,6 @@
       /><br />
       <label for="environment">Environment:</label><br />
       <input type="text" id="environment" name="ENVIRONMENT" /><br />
-      <label for="report_number">Report Number:</label><br />
-      <input type="text" id="report_number" name="REPORT_NUMBER" /><br />
-      <label for="report_class">Report Class:</label><br />
-      <input type="text" id="report_class" name="REPORT_CLASS" /><br />
       <input type="submit" value="Submit" />
     </form>
   </body>
