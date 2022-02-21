@@ -156,7 +156,6 @@ app.put('/sighting/:index/edit', (req,res) =>{
 
 // BLOCKERS 1a= couldnt get the shapesObj to render in shapes.ejs when manipulation were done there 
 // BLOCKERS 1b = shapeObject not found
-// BLOCKER 1c = sort by shape or sort by count
 // thinking of a counter and object tally
 app.get(`/shapes`, (req, res) => {
   
@@ -183,8 +182,11 @@ app.get(`/shapes`, (req, res) => {
          shapeObject.element +=1
       }}
     )
-     
-       res.render(`shapes`, shapeObject)
+    // sort by values
+    // shapeObject.sort(function (a, b) {
+    //   return a.value - b.value;
+    // });
+    res.render(`shapes`, shapeObject)
 
       // res.send(`shapes`, {data})
       // doing tally in shapes.ejs -> bring below over
@@ -206,5 +208,23 @@ app.get(`/shapes`, (req, res) => {
 
   })
 })
+
+const getShape = (request, response) =>{
+  console.log(`request came in`, request.body)
+
+  read(`data.json`, (readErr, jsonContentObj) => {
+    if(readErr){
+      console.error(`ReadError`, readErr)
+      response.send('ERROR')
+    } else {
+      console.log(request.params)
+      let shape = request.params.index
+      console.log(`index`, typeof shape, shape)
+      const sightingsMatchingShape = jsonContentObj.sightings.filter(element => element.SHAPE === shape )
+      response.send(sightingsMatchingShape)
+    }
+  })
+}
+app.get(`/shapes/:shape`, getShape)
 
 app.listen(port)

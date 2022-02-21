@@ -9,6 +9,9 @@
   <body>
     <div>
       <h1>All UFO Shapes</h1>
+        <%  shapeObject.sort(function (a, b) {%>
+          <%  return a.value - b.value; %>
+          <% }) %>
         <%for (const [key, value] of Object.entries(shapeObject)) {%>
         <ul><%=key%>
             <%=value%>
