@@ -3,13 +3,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
+    </head>
  <body>
+   <%- include('navigator_bar') -%>
  <form action="/sighting/<%=oneSighting.index%>?_method=PUT" method="POST">
-  <% for (const [key,value] of Object.entries(oneSighting)) {%> <% if (key != "index"){%>
- <label for="<%= key %>"><%= key %></label><br />
- <input type="text" id="<%=key%>" name="<%=key%>" value="<%=value%>" /><br />
- <% } %> <% } %>
+ <% for (const [key,value] of Object.entries(oneSighting)) {%> 
+  <% if (!(key==="OBSERVED")){%>
+    <label for="<%= key %>"><%= key %></label><br />
+    <input type="text" id="<%key%>" name="<%=key%>" value="<%=value%>"      
+    /><br /> <br />
+    <%}else{%>
+    <textarea id="observed" rows="10" cols="70" name="OBSERVED"></textarea><br /> <br />
+    <%}%>
+  <%}%>
  <input type="submit" value="Submit" />
  </form>
  </body>
