@@ -160,14 +160,16 @@ app.put('/sighting/:index/edit', (req,res) =>{
 app.get(`/shapes`, (req, res) => {
   
   read(`data.json`, (error, jsonObjContent)=>{
-    let shapeObject = {}
+    // let shapeCounterArray = []
+    // let keyValueCounter = {}
+    // let shapeCounterObject = {}
     if (error){
     // res.send(404).json(`data does not exist`)
     res.status(404).send("Data does not exist")
     // res.send("error in data")
     }
     let data = jsonObjContent.sightings
-    console.log(`contents`, data)
+    // console.log(`contents`, data)
 
     // do the tally in .js instead of shapes.ejs
     let shapesArray = []
@@ -175,38 +177,12 @@ app.get(`/shapes`, (req, res) => {
       let shape = data[i].SHAPE
       shapesArray.push(shape)
     }
-    shapesArray.forEach(element => {
-      if (!(element in shapesArray)) {
-        shapeObject.shape = 1
-      } else {
-         shapeObject.element +=1
-      }}
-    )
- 
-    // sort by values
-    shapeObject.sort(function (a, b) {
-      return a.value - b.value;
-    });
-    res.render(`shapes`, {shapeObject})
-
-      // res.send(`shapes`, {data})
-      // doing tally in shapes.ejs -> bring below over
-      // <% let shapeObject ={} %>
-      // <% const index=data.length %>
-      // <% for(let i=0; i < index; i +=1) { %>
-      //   <% let shape=data[i].SHAPE%>
-      //   <% if !(shape in shapeObject) { %>
-      //     <% shapeObject.shape = 1   %> 
-      //     <%} else { %>
-      //     <%  shapeObject.shape +=1  %> 
-      //   <% } %>
-      //    <%} %>
-      //   <%for (const [key, value] of Object.entries(shapeObject)) {%>
-      //   <ul><%=key%>
-      //       <%=value%>
-      //   </ul>
-      //   <%}%>  
-
+    console.log(shapesArray)
+    let shapeCounterObject = shapesArray.reduce(function (acc, curr) {
+      return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+        }, {});
+    console.log(shapeCounterObject)
+    res.render(`shapes`, {shapeCounterObject})
   })
 })
 

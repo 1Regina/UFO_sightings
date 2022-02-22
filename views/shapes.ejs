@@ -10,14 +10,13 @@
     <%- include('navigator_bar') -%>
     <div>
       <h1>All UFO Shapes</h1>
-        <%  shapeObject.sort(function (a, b) {%>
-          <%  return a.value - b.value; %>
-          <% }) %>
-        <%for (const [key, value] of Object.entries(shapeObject)) {%>
+        <%for (const [key, value] of Object.entries(shapeCounterObject)) {%>
         <ul> 
             <% let url = `/sighting/${key}` %>
-            <a href="<%=url %>"><%=key%></a>
-            <%=value%>
+            <h5>
+              <a href="<%=url %>"><%=key%></a>
+                <%=value%>
+            </h5>
         </ul>
         <%}%>  
     </div>
