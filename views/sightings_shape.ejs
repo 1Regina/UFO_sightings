@@ -9,8 +9,8 @@
 <body>
     <%- include('navigator_bar') -%>
     <div class="container">
-      <h1>All UFO Sighting for </h1>      
-      <h1 class="text-info"><%=sightingsMatchingShape[0].SHAPE%></h1>
+      <h1>All UFO Sightings for Shape of</h1> 
+      <h1 class="text-info"><%=sightingsMatchingShape[0].SHAPE%></h1>  
     <% for (let i=0; i< sightingsMatchingShape.length; i+=1) { %>
       <div class="container">
          <div class="shadow p-3 mb-5 bg-white rounded">
