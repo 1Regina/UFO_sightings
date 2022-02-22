@@ -1,13 +1,13 @@
 import express from 'express';
 import read, {add, write} from './jsonFileStorage.js';
 import fs from 'fs';
-// import methodOverride from 'method-override';
+import methodOverride from 'method-override';
 
 const app = express();
 app.use(express.static('public'));
 // Configure Express to parse request body data into request.body
 app.use(express.urlencoded({ extended: false }));
-
+app.use(methodOverride('_method'));
 const port = 3004
 
 // Set view engine
@@ -35,10 +35,13 @@ app.delete('/sighting/:index/delete', (request, response) => {
   const { index } = request.params;
   read('data.json', (err, data) => {
     data['sightings'].splice(index, 1);
+    console.log(data) 
     write('data.json', data, (err) => {
       const numOfRecords = {index : data.length};
-      response.render('listing',numOfRecords);
+      // response.render('listing',numOfRecords);
+  
     });
+    response.send(`Delete Successful!`)
   });
 });
 
