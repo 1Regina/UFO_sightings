@@ -9,7 +9,8 @@
   <body>
     <%- include('navigator_bar') -%>
     <div>
-      <h1>All UFO Shapes</h1>
+      <div class="container"><h1>All UFO Shapes</h1>
+
         <%for (const [key, value] of Object.entries(shapeCounterObject)) {%>
         <ul> 
             <% let url = `/shapes/${key}` %>
@@ -19,6 +20,8 @@
             </h5>
         </ul>
         <%}%>  
+ 
+      </div> 
     </div>
   </body>
 </html>

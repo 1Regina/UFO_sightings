@@ -7,6 +7,8 @@
     <title>New UFO Sighting</title>
   </head>
   <body>
+     <%- include('navigator_bar') -%>
+    <div class="container">
     <form action="/sighting" method="POST">
       <label for="date">Date:</label><br />
       <input type="date" id="date" name="DATE" required /><br />     
@@ -40,5 +42,6 @@
       <input type="text" id="environment" name="ENVIRONMENT" /><br />
       <input type="submit" value="Submit" />
     </form>
+   </div>
   </body>
 </html>

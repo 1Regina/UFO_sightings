@@ -8,18 +8,24 @@
   </head>
   <body>
     <%- include('navigator_bar') -%>
-    <%const text= "Index Page" %>
-    <a href="<%="/"%>"><%=text %></a>
+    <!-- <%const text= "Index Page" %>
+    <a href="<%="/"%>"><%=text %></a> -->
     <div>   
+      <div class="container">
+        <div class="shadow p-3 mb-5 bg-white rounded">
         <%for (const [key, value] of Object.entries(details)) {%>
-        <ul><%=key%>
-            <%=value%>
-        </ul>
+      
+            <ul><h6><%=key%></h6>
+              <p class="text-muted"><%=value%></p>
+            </ul>
+      
         <%}%>
-    </div>
-    <div>
-      <%="Just the year " + details.YEAR%>
-      <%="Just the year " %><%=details.YEAR%>
+        </div>
+      </div>
+          <div>
+          <!-- <%="Just the year " + details.YEAR%> -->
+          <!-- <%="Just the year " %><%=details.YEAR%> -->
+          </div>
     </div>
   </body>
 </html>
