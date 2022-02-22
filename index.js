@@ -174,10 +174,14 @@ app.get(`/shapes`, (req, res) => {
     // do the tally in .js instead of shapes.ejs
     let shapesArray = []
     for (let i=0; i< data.length; i +=1 ){
-      let shape = data[i].SHAPE
+      // console.log(`type`, typeof shapesArray[0])
+      let shape = String(data[i].SHAPE)
+      shape = shape.replace(/ /g, "_");
+      shape = shape.toUpperCase();
       shapesArray.push(shape)
     }
-    console.log(shapesArray)
+    shapesArray.sort()
+    console.log(`shape array caps`, shapesArray)
     let shapeCounterObject = shapesArray.reduce(function (acc, curr) {
       return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
         }, {});
