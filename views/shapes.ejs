@@ -12,7 +12,7 @@
       <h1>All UFO Shapes</h1>
         <%for (const [key, value] of Object.entries(shapeCounterObject)) {%>
         <ul> 
-            <% let url = `/sighting/${key}` %>
+            <% let url = `/shapes/${key}` %>
             <h5>
               <a href="<%=url %>"><%=key%></a>
                 <%=value%>
