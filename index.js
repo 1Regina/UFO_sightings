@@ -200,7 +200,7 @@ const getShape = (request, response) =>{
       console.log(request.params)
       let shape = request.params.shape
       console.log(`index`, typeof shape, shape)
-      const sightingsMatchingShape = jsonContentObj.sightings.filter(element => element.SHAPE === shape )
+      const sightingsMatchingShape = jsonContentObj.sightings.filter(element => (element.SHAPE.replace(/ /g, "_")).toUpperCase() === shape )
       // response.send(sightingsMatchingShape)
       console.log(sightingsMatchingShape)
       // response.send(`getting there`)
