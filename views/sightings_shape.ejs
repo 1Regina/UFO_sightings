@@ -10,12 +10,17 @@
     <%- include('navigator_bar') -%>
     <div>
     <% for (let i=0; i< sightingsMatchingShape.length; i+=1) { %>
+      <div class="container">
+         <div class="shadow p-3 mb-5 bg-white rounded">
         <%for (const [key, value] of Object.entries(sightingsMatchingShape[i])) {%>
-        <ul><%=key%>
-            <%=value%>
-         </ul>
-      <%}%>
+        
+          <ul><h6><%=key%></h6>
+              <p class="text-muted"><%=value%></p>
+          </ul>
+        <%}%>
+       </div>
+      </div>
     <%}%>
-  </div> 
+    </div> 
 </body>
 </html>
