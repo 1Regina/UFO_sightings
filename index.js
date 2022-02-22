@@ -195,10 +195,13 @@ const getShape = (request, response) =>{
       response.send('ERROR')
     } else {
       console.log(request.params)
-      let shape = request.params.index
+      let shape = request.params.shape
       console.log(`index`, typeof shape, shape)
       const sightingsMatchingShape = jsonContentObj.sightings.filter(element => element.SHAPE === shape )
-      response.send(sightingsMatchingShape)
+      // response.send(sightingsMatchingShape)
+      console.log(sightingsMatchingShape)
+      // response.send(`getting there`)
+      response.render(`sightings_shape`,{sightingsMatchingShape})
     }
   })
 }
