@@ -192,7 +192,6 @@ app.get(`/shapes`, (req, res) => {
 
 const getShape = (request, response) =>{
   console.log(`request came in`, request.body)
-
   read(`data.json`, (readErr, jsonContentObj) => {
     if(readErr){
       console.error(`ReadError`, readErr)
