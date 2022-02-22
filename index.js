@@ -117,15 +117,18 @@ app.get('/sighting/:index/edit', (req,res) =>{
 
 // BLOCKER_2!! Thunderclient is ok. Cannot route to ("/sighting/:index/")
 app.put('/sighting/:index/edit', (req,res) =>{
-    const {index} = req.params.index;
+    const {index} = req.params;
+    console.log(`index`, index)
     read(`data.json`, (error, jsonObjContent) => {
     if (error) {
       console.error(`read error`, error);
       return;
     };
-
+    console.log(req.body)
     jsonObjContent.sightings[index] = req.body;
     const details = jsonObjContent.sightings[index];
+    console.log(details)
+    
     write('data.json', jsonObjContent, (err) => {
     //   // res.send('Done!');
       res.render(`single_sighting`, {details});

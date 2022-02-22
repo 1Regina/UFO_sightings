@@ -36,7 +36,7 @@
                   </div> 
                   <div class="col-sm-1">
               <% let delete_id = `delete ${i}` %>
-          <form action="/sighting/<%=i%>/delete?_method=DELETE" method="POST">
+          <form action="/sighting/<%=i%>/delete?_method=PUT" method="POST">
               <input type="submit" value="Delete" <%=id= delete_id %>/>   
               </form>   
               </div>  
