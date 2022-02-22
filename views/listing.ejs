@@ -12,19 +12,32 @@
         <div class="row">
           <div class="col-sm-6" style="padding-bottom: 30px;">
             <h1>All UFO Sightings</h1>
+
             <%let index=data.length %>
             <% for(let i=0; i < index; i +=1) { %>
             <ul>
-              <% let date=data[i].DATE%>
-              <span><%=date%></span>
-              <% let city=data[i].CITY%>
-              <span><%=city%></span>
-              <% let shape=data[i].SHAPE%>
-              <span style="color:turquoise" ><%=shape%> </span>
+             <div class="container">
+                <div class="row">
+                  <div class="col-sm-3">
               <% let url = `/sighting/${i}` %> <% let text = `Sighting ${i}` %>
               <a href="<%=url %>"><%=text %></a>
+                  </div> 
+                  <div class="col-sm-3">
+              <% let date=data[i].DATE%>
+              <span><%=date%></span>
+                  </div> 
+                  <div class="col-sm-3">
+              <% let city=data[i].CITY.toUpperCase()%>
+              <span  style="color:rgb(50, 190, 176)" ><%=city%></span>
+                   </div> 
+                   <div class="col-sm-2">
+              <% let shape=data[i].SHAPE.toUpperCase()%>
+              <span style="color:rgb(21, 136, 124)" ><%=shape%> </span>
+                  </div> 
+                  <div class="col-sm-1">
               <% let delete_id = `delete ${i}` %>
               <input type="submit" value="Delete" <%=id= delete_id %>/>
+                   </div> 
             </ul>
             <% } %>
           </div>  
