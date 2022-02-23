@@ -20,13 +20,9 @@ app.get(`/`, (req, res) => {
       console.error (`read error` , error)
       return;
     } 
-
     const data = jsonObjContent.sightings;
     // put in an object so can use the key-value
     res.render(`listing`, {data}); 
-
-    // const numOfRecords = {index : data.length};
-    // res.render(`listing`, numOfRecords); // put in a object so u can use the key-value
     });
 });
 
@@ -45,7 +41,7 @@ app.delete('/sighting/:index/delete', (request, response) => {
   });
 });
 
-// COMFORTABLE - redirect to http://localhost:3004/sighting/<INDEX>
+
 // Render the form to input new sightings
 app.get('/sighting', (request, response) => {
   response.render('sighting');
@@ -61,9 +57,7 @@ app.post('/sighting', (request, response) => {
       return;
     }
   });
-    // Acknowledge sighting saved.
-    // return response.send('Saved bigfoot sighting!');
-  // Redirect to new recording
+  // Redirect to display new recording
   read(`data.json`, (error, jsonObjContent) => {
     if (error) {
       console.error(`read error`, error);
@@ -85,9 +79,6 @@ app.get('/sighting/:index', (req,res) =>{
       console.error(`read error`, error);
       return;
     }
-    // const data = jsonObjContent.sightings;
-    // console.log(`data`,data)
-    // const total = data.length
     const details = jsonObjContent.sightings[req.params.index];
     console.log(`details`, details);
     res.render(`single_sighting`, {details});
@@ -143,32 +134,9 @@ app.put('/sighting/:index/edit', (req,res) =>{
 })
 
 
-// Not relevant as display vs edit form is different in res.render portion
-// const displaySighting = (req, res) => {
-//    console.log(`request came in`)
-//      read(`data.json`, (error, jsonObjContent) => {
-//     if (error) {
-//       console.error(`read error`, error);
-//       return;
-//     }
-//     const details = jsonObjContent.sightings[req.params.index];
-//     console.log(`details`, details);
-//     res.render(`editForm`, {details});
-//   });
-// }
-
-// app.get('/sighting/:index', displaySighting)
-// app.get('/sighting/:index/edit', displaySighting)
-
-// BLOCKERS 1a= couldnt get the shapesObj to render in shapes.ejs when manipulation were done there 
-// BLOCKERS 1b = shapeObject not found
-// thinking of a counter and object tally
 app.get(`/shapes`, (req, res) => {
   
   read(`data.json`, (error, jsonObjContent)=>{
-    // let shapeCounterArray = []
-    // let keyValueCounter = {}
-    // let shapeCounterObject = {}
     if (error){
     // res.send(404).json(`data does not exist`)
     res.status(404).send("Data does not exist")
