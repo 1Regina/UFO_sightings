@@ -187,21 +187,30 @@ app.get(`/shapes/:shape`, getShape)
 
 const sortByDate = (req, res) => {
   let sightingsMatchingShape = []
-  console.log(`request came in`, req.params)
   read(`data.json`, (readErr, jsonContentObj) => {
     if (readErr) {
       console.error(`ReadError`, readErr)
       res.send(`Error Reading File`) 
     } 
-  console.log(req.params)
-  let shape=String(req.params.shape)
-  sightingsMatchingShape = jsonContentObj.sightings.filter( e => String(e.SHAPE).replace(/ /g, "_").toUpperCase() === shape)
-  sightingsMatchingShape.sort((a,b)=>new Date(b.DATE) - new Date(a.DATE));
-  console.log(`array of filter records matching shape`, sightingsMatchingShape)
-  res.render(`sightings_shape`,{sightingsMatchingShape})
+    let shape=String(req.query.shape)
+    try {
+      sightingsMatchingShape = jsonContentObj.sightings.filter( e => String(e.SHAPE).replace(/ /g, "_").toUpperCase() === shape)
+    } catch (exc) {
+    }
+
+    const ascFn = (a,b)=> new Date(a.DATE) - new Date(b.DATE)
+    const descFn = (a,b)=> new Date(b.DATE) - new Date(a.DATE)
+
+    sightingsMatchingShape.sort(
+      req.query.sort === 'asc' ? ascFn : descFn
+    );
+    // console.log(`array of filter records matching shape`, sightingsMatchingShape)
+
+    res.render(`sightings_shape`,{sightingsMatchingShape})
+    // res.send("hello")
   })
 }
-app.get(`/shapes/:shape/datesort?`, sortByDate)
 
+app.get(`/shape-detail`, sortByDate)
 
 app.listen(port)

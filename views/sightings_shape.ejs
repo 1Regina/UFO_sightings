@@ -17,11 +17,15 @@
 
         <div class="container">
           <div class="d-flex flex-row-reverse">
-                <form action="/shapes/<%=processedShape%>/citysort" method="GET">
-                  <input type="submit" value="Sort by City" <%=id= "yearSort" %>/>
+                <form action="/shape-detail" method="GET">
+                  <input type="hidden" name="shape" value=<%=processedShape%> /> 
+                  <input type="hidden" name="sort" value="desc" /> 
+                  <input type="submit" value="Latest"/>
                 </form>  
-                <form action="/shapes/<%=processedShape%>/datesort" method="GET">
-                  <input type="submit" value="Sort by Date" <%=id= "dateSort" %>/>
+                <form action="/shape-detail" method="GET">
+                  <input type="hidden" name="shape" value=<%=processedShape%> /> 
+                  <input type="hidden" name="sort" value="asc" /> 
+                  <input type="submit" value="Earliest"/>
                 </form>   
           </div>
         </div> 
