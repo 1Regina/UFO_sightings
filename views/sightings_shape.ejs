@@ -10,13 +10,22 @@
     <%- include('navigator_bar') -%>
     <div class="container">
       <h1>All UFO Sightings for Shape of</h1> 
-      <h1 class="text-info"><%=String(sightingsMatchingShape[0].SHAPE).toUpperCase()%></h1>  
+
+      <% let processedShape = String(sightingsMatchingShape[0].SHAPE).replace(/ /g, "_").toUpperCase()%>
+      <h1 class="text-info"><%=processedShape%></h1>  
+
+
         <div class="container">
           <div class="d-flex flex-row-reverse">
-            <input type="submit" value="Sort by Date" <%=id= "dateSort" %>/>
-            <input type="submit" value="Sort by Year" <%=id= "yearSort" %>/>    
-            </div>
-          </div> 
+                <form action="/shapes/<%=processedShape%>/citysort" method="GET">
+                  <input type="submit" value="Sort by City" <%=id= "yearSort" %>/>
+                </form>  
+                <form action="/shapes/<%=processedShape%>/datesort" method="GET">
+                  <input type="submit" value="Sort by Date" <%=id= "dateSort" %>/>
+                </form>   
+          </div>
+        </div> 
+
     <% for (let i=0; i< sightingsMatchingShape.length; i+=1) { %>
       <div class="container">
          <div class="shadow p-3 mb-5 bg-white rounded">

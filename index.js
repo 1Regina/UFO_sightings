@@ -184,4 +184,24 @@ const getShape = (request, response) =>{
 }
 app.get(`/shapes/:shape`, getShape)
 
+
+const sortByDate = (req, res) => {
+  let sightingsMatchingShape = []
+  console.log(`request came in`, req.params)
+  read(`data.json`, (readErr, jsonContentObj) => {
+    if (readErr) {
+      console.error(`ReadError`, readErr)
+      res.send(`Error Reading File`) 
+    } 
+  console.log(req.params)
+  let shape=String(req.params.shape)
+  sightingsMatchingShape = jsonContentObj.sightings.filter( e => String(e.SHAPE).replace(/ /g, "_").toUpperCase() === shape)
+  sightingsMatchingShape.sort((a,b)=>new Date(b.DATE) - new Date(a.DATE));
+  console.log(`array of filter records matching shape`, sightingsMatchingShape)
+  res.render(`sightings_shape`,{sightingsMatchingShape})
+  })
+}
+app.get(`/shapes/:shape/datesort?`, sortByDate)
+
+
 app.listen(port)
