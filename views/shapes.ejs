@@ -8,17 +8,18 @@
   <!-- </head> -->
   <!-- <body> -->
     <%- include('navigator_bar') -%>
-     <div class="container"><h1>All UFO Shapes</h1>
+     <div class="container"><h1>Counter of UFO Shapes</h1>
+     </br>
         <%for (const [key, value] of Object.entries(shapeCounterObject)) {%>
         <ul> 
            <div class="row">
-             <div class="col-sm-3">
+             <div class="col-sm-4">
             <% let url = `/shapes/${key}` %>
             <h5>
               <a href="<%=url %>"><%=key%></a>
             </h5>  
              </div>
-             <div class="col-sm-3">
+             <div class="col-sm-2">
               <h6>   
                 <%=value%>
               </h6>
