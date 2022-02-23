@@ -10,7 +10,7 @@
     <%- include('navigator_bar') -%>
     <div class="container">
       <h1>All UFO Sightings for Shape of</h1> 
-       <h1 class="text-info"><%=sightingsMatchingShape[0].SHAPE%></h1>  
+      <h1 class="text-info"><%=String(sightingsMatchingShape[0].SHAPE).toUpperCase()%></h1>  
         <div class="container">
           <div class="d-flex flex-row-reverse">
             <input type="submit" value="Sort by Date" <%=id= "dateSort" %>/>
