@@ -236,6 +236,36 @@ app.get(`/shape-detail`, sortShapeByDate)
 // app.get(`/listings-sortDates/:sortHow`, sortSummarybyDate)
 
 // method 2: better. sort listing by chosen parameter
+
+function dynamicAscSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        /* next line works with strings and numbers, 
+         * and you may want to customize it to your needs
+         */
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+function dynamicDescSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        /* next line works with strings and numbers, 
+         * and you may want to customize it to your needs
+         */
+        var result = (a[property] < b[property]) ? 1 : (a[property] > b[property]) ? -1 : 0;
+        return result * sortOrder;
+    }
+}
+
 const sortSummary = (req, res) => {
   let data = []
   read(`data.json`, (readErr, jsonContentObj) => {
@@ -251,7 +281,22 @@ const sortSummary = (req, res) => {
   // sorting condition
   data.sort(
     req.params.sortHow === `asc` ? ascFn : descFn  
-  )}
+    )
+  } else if (req.params.parameter==="city") {
+  // const ascFn  = (a,b)=> {(String(a.CITY).replace(/ /g, "_").toUpperCase()) >  (String(b.CITY).replace(/ /g, "_").toUpperCase()) ? 1 : -1}
+  // const descFn = (a,b)=> {(String(a.CITY).replace(/ /g, "_").toUpperCase()) <  (String(b.CITY).replace(/ /g, "_").toUpperCase()) ? 1 : -1}
+
+  // sorting condition
+  data.sort(
+    req.params.sortHow === `asc` ? dynamicAscSort("CITY") : dynamicDescSort("CITY") 
+    )
+  } else if (req.params.parameter==="shape") {
+
+  // sorting condition
+  data.sort(
+    req.params.sortHow === `asc` ?dynamicAscSort("SHAPE") : dynamicDescSort("SHAPE") 
+    )
+  }  
   res.render(`listing`, {data})
   })
 }
