@@ -109,7 +109,7 @@ app.get('/sighting/:index/edit', (req,res) =>{
   });
 });
 
-// BLOCKER_2!! Thunderclient is ok. Cannot route to ("/sighting/:index/")
+// Put to post updates to data.json
 app.put('/sighting/:index/edit', (req,res) =>{
     const {index} = req.params;
     console.log(`index`, index)
@@ -136,9 +136,8 @@ app.put('/sighting/:index/edit', (req,res) =>{
   
 })
 
-
-app.get(`/shapes`, (req, res) => {
-  
+// render a summary of shape counter
+app.get(`/shapes`, (req, res) => {  
   read(`data.json`, (error, jsonObjContent)=>{
     if (error){
     // res.send(404).json(`data does not exist`)
@@ -167,6 +166,7 @@ app.get(`/shapes`, (req, res) => {
   })
 })
 
+// get listings of all records matching the chosen shape from shape counter page
 const getShape = (request, response) =>{
   console.log(`request came in`, request.body)
   read(`data.json`, (readErr, jsonContentObj) => {
@@ -187,7 +187,7 @@ const getShape = (request, response) =>{
 }
 app.get(`/shapes/:shape`, getShape)
 
-
+// a sort function to sort all sightings tallying the filtered shape by date
 const sortShapeByDate = (req, res) => {
   let sightingsMatchingShape = []
   read(`data.json`, (readErr, jsonContentObj) => {
@@ -239,7 +239,6 @@ app.get(`/shape-detail`, sortShapeByDate)
 // app.get(`/listings-sortDates/:sortHow`, sortSummarybyDate)
 
 // method 2: better. sort listing by chosen parameter
-
 function dynamicAscSort(property) {
     var sortOrder = 1;
     if(property[0] === "-") {
@@ -269,6 +268,7 @@ function dynamicDescSort(property) {
     }
 }
 
+// sort function sort date, city and shape for the opening listing summary page at Main page
 const sortSummary = (req, res) => {
   let data = []
   read(`data.json`, (readErr, jsonContentObj) => {
