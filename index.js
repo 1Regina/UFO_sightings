@@ -53,6 +53,8 @@ app.post('/sighting', (request, response) => {
   // Add new sighting data in request.body to sightings array in data.json.
   console.log('before added sighting')
   request.body.CREATED_ON = start
+  request.body.SHAPE = request.body.SHAPE.replace(/ /g, "_").toUpperCase()
+  request.body.CITY = request.body.CITY.replace(/ /g, "_").toUpperCase()
   add('data.json', 'sightings', request.body, (err) => {
     console.log('added sighting')
     if (err) {
@@ -122,6 +124,8 @@ app.put('/sighting/:index/edit', (req,res) =>{
       return;
     };
     console.log(req.body)
+    req.body.SHAPE = req.body.SHAPE.replace(/ /g, "_").toUpperCase()
+    req.body.CITY = req.body.CITY.replace(/ /g, "_").toUpperCase()
     jsonObjContent.sightings[index] = req.body;
     const details = jsonObjContent.sightings[index];
     console.log(details)
@@ -300,7 +304,7 @@ const sortSummary = (req, res) => {
 
   // sorting condition
   data.sort(
-    req.params.sortHow === `asc` ?dynamicAscSort("SHAPE") : dynamicDescSort("SHAPE") 
+    req.params.sortHow === `asc` ? dynamicAscSort("SHAPE".replace(/ /g, "_").toUpperCase()) : dynamicDescSort("SHAPE".replace(/ /g, "_").toUpperCase()) 
     )
   }  
   res.render(`listing`, {data})
