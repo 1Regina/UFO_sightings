@@ -9,6 +9,7 @@
    <%- include('navigator_bar') -%>
     <div class="container">
         <h1>Edit record</h1> 
+         <br>
          <form action="/sighting/<%=oneSighting.index%>/edit?_method=PUT" method="POST">
         <% for (const [key,value] of Object.entries(oneSighting)) {%> 
           <% if (!(key==="OBSERVED")){%>

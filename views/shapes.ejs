@@ -9,7 +9,10 @@
   <!-- <body> -->
     <%- include('navigator_bar') -%>
      <div class="container"><h1>Counter of UFO Shapes</h1>
-     </br>
+     <br>
+     <br>
+    <div class="container-lg">
+    <div class="shadow p-3 mb-5 bg-white rounded">
         <%for (const [key, value] of Object.entries(shapeCounterObject)) {%>
         <ul> 
            <div class="row">
@@ -28,5 +31,7 @@
         </ul>
         <%}%>  
       </div> 
+    </div>
+    </div>  
   </body>
 </html>

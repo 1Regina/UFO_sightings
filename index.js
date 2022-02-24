@@ -245,7 +245,7 @@ const sortSummary = (req, res) => {
     } 
   data = jsonContentObj.sightings  
 
-  if (req.params.parameter==="dates") {
+  if (req.params.parameter==="date") {
   const ascFn = (a,b)=> new Date(a.DATE) - new Date(b.DATE)
   const descFn = (a,b)=> new Date(b.DATE) - new Date(a.DATE)
   // sorting condition

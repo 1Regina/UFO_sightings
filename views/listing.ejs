@@ -11,17 +11,20 @@
   <body> -->
     
     <%- include('navigator_bar') -%>
-       <div class="col-sm-9 text-right">
-        <div class="dropdown">
-          <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          Arrange By
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="http://localhost:3004/listings-sortby/dates/asc">Date</a></li>
-          <li><a class="dropdown-item" href="#">City</a></li>
-          <li><a class="dropdown-item" href="#">Shape</a></li>
-          </ul>
-        </div>
+        <div class="col-sm-9 text-right">
+          <div class="dropdown">
+            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Arrange By
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="http://localhost:3004/listings-sortby/date/asc">Date (Earliest)</a></li>
+            <li><a class="dropdown-item" href="http://localhost:3004/listings-sortby/date/desc">Date (Latest</a></li>          
+            <li><a class="dropdown-item" href="http://localhost:3004/listings-sortby/city/asc">City (A-Z)</a></li>
+            <li><a class="dropdown-item" href="http://localhost:3004/listings-sortby/city/desc">City (Z-A)</a></li>
+            <li><a class="dropdown-item" href="http://localhost:3004/listings-sortby/shape/asc">Shape (A-Z)</a></li>
+            <li><a class="dropdown-item" href="http://localhost:3004/listings-sortby/shape/desc">Shape (Z-A)</a></li>
+            </ul>
+          </div>
         </div>
         <div class="container">
         <div class="row">
@@ -33,6 +36,7 @@
             <% for(let i=0; i < index; i +=1) { %>
             <ul>
              <div class="container">
+             <div class="shadow p-3 mb-5 bg-white rounded">
                 <div class="row">
                   <div class="col-sm-2">
               <% let url = `/sighting/${i}` %> <% let text = `Sighting ${i}` %>
@@ -45,28 +49,30 @@
                   <div class="col-sm-2">
               <% let city=data[i].CITY.toUpperCase()%>
               <span  style="color:rgb(50, 190, 176)" ><%=city%></span>
-                   </div> 
-                   <div class="col-sm-2">
+                  </div> 
+                  <div class="col-sm-2">
               <% let shape=data[i].SHAPE.toUpperCase()%>
               <span style="color:rgb(2, 68, 60)" ><%=shape%> </span>
                   </div> 
-                    <div class="col-sm-1">
+                  <div class="col-sm-1">
                <% let update_id = `update ${i}` %>
                 <form action="/sighting/<%=i%>/edit" method="GET">
                 <input type="submit" value="Update" <%=id= update_id %>/>   
                 </form>   
-                    </div>      
-                    <div class="col-sm-1">
+                  </div>      
+                  <div class="col-sm-1">
               <% let delete_id = `delete ${i}` %>
                 <form action="/sighting/<%=i%>/delete?_method=DELETE" method="POST">
                 <input type="submit" value="Delete" <%=id= delete_id %>/>   
                 </form>   
-                  </div>  
-
-            </ul>
+                  </div>
+                </div>    
+             </div>
+             </div>       
+             </ul>
             <% } %>
           </div>  
         </div>
-      </div>
+        </div>
   </body>
 </html>
