@@ -185,7 +185,7 @@ const getShape = (request, response) =>{
 app.get(`/shapes/:shape`, getShape)
 
 
-const sortByDate = (req, res) => {
+const sortShapeByDate = (req, res) => {
   let sightingsMatchingShape = []
   read(`data.json`, (readErr, jsonContentObj) => {
     if (readErr) {
@@ -212,6 +212,50 @@ const sortByDate = (req, res) => {
     // res.send("hello")
   })
 }
-app.get(`/shape-detail`, sortByDate)
+app.get(`/shape-detail`, sortShapeByDate)
+
+// method 1. sory listing by date only
+// const sortSummarybyDate = (req, res) => {
+//   let data = []
+//   read(`data.json`, (readErr, jsonContentObj) => {
+//     if (readErr) {
+//       console.error(`ReadError`, readErr)
+//       res.send(`Error Reading File`) 
+//     } 
+//   data = jsonContentObj.sightings  
+//   const ascFn = (a,b)=> new Date(a.DATE) - new Date(b.DATE)
+//   const descFn = (a,b)=> new Date(b.DATE) - new Date(a.DATE)
+//   // sorting condition
+//   data.sort(
+//     req.params.sortHow === `asc` ? ascFn : descFn  
+//   )  
+    
+//   res.render(`listing`, {data})
+//   })
+// }
+// app.get(`/listings-sortDates/:sortHow`, sortSummarybyDate)
+
+// method 2: better. sort listing by chosen parameter
+const sortSummary = (req, res) => {
+  let data = []
+  read(`data.json`, (readErr, jsonContentObj) => {
+    if (readErr) {
+      console.error(`ReadError`, readErr)
+      res.send(`Error Reading File`) 
+    } 
+  data = jsonContentObj.sightings  
+
+  if (req.params.parameter==="dates") {
+  const ascFn = (a,b)=> new Date(a.DATE) - new Date(b.DATE)
+  const descFn = (a,b)=> new Date(b.DATE) - new Date(a.DATE)
+  // sorting condition
+  data.sort(
+    req.params.sortHow === `asc` ? ascFn : descFn  
+  )}
+  res.render(`listing`, {data})
+  })
+}
+app.get(`/listings-sortby/:parameter/:sortHow`, sortSummary)
+
 
 app.listen(port)
