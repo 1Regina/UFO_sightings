@@ -17,16 +17,18 @@
 
         <div class="container">
           <div class="d-flex flex-row-reverse">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <form action="/shape-detail" method="GET">
                   <input type="hidden" name="shape" value=<%=processedShape%> /> 
                   <input type="hidden" name="sort" value="desc" /> 
-                  <input type="submit" value="Latest"/>
+                  <input type="submit" value="Latest" class="btn btn-light"/>
                 </form>  
                 <form action="/shape-detail" method="GET">
                   <input type="hidden" name="shape" value=<%=processedShape%> /> 
                   <input type="hidden" name="sort" value="asc" /> 
-                  <input type="submit" value="Earliest"/>
-                </form>   
+                  <input type="submit" value="Earliest" class="btn btn-light"/>
+                </form>  
+             </div>    
           </div>
         </div> 
 

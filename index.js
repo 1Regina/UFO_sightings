@@ -193,6 +193,7 @@ const sortByDate = (req, res) => {
       res.send(`Error Reading File`) 
     } 
     let shape=String(req.query.shape)
+    // check if error is arising from the array sightingsMatchingShape
     try {
       sightingsMatchingShape = jsonContentObj.sightings.filter( e => String(e.SHAPE).replace(/ /g, "_").toUpperCase() === shape)
     } catch (exc) {
@@ -201,6 +202,7 @@ const sortByDate = (req, res) => {
     const ascFn = (a,b)=> new Date(a.DATE) - new Date(b.DATE)
     const descFn = (a,b)=> new Date(b.DATE) - new Date(a.DATE)
 
+    // sorting condition
     sightingsMatchingShape.sort(
       req.query.sort === 'asc' ? ascFn : descFn
     );
@@ -210,7 +212,6 @@ const sortByDate = (req, res) => {
     // res.send("hello")
   })
 }
-
 app.get(`/shape-detail`, sortByDate)
 
 app.listen(port)
