@@ -13,7 +13,7 @@
     <%- include('navigator_bar') -%>
         <div class="col-sm-10 text-right">
           <div class="dropdown">
-            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             Arrange By
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -48,11 +48,11 @@
                   </div> 
                   <div class="col-sm-2">
               <% let city=data[i].CITY.toUpperCase()%>
-              <span  style="color:rgb(50, 190, 176)" ><%=city%></span>
+              <span  style="color:rgb(2, 68, 80)" ><%=city%></span>
                   </div> 
                   <div class="col-sm-2">
               <% let shape=data[i].SHAPE.toUpperCase()%>
-              <span style="color:rgb(2, 68, 60)" ><%=shape%> </span>
+              <span style="color:rgb(50, 190, 176)" ><%=shape%> </span>
                   </div> 
                   <div class="col-sm-1">
                <% let update_id = `update ${i}` %>
@@ -73,6 +73,6 @@
             <% } %>
           </div>  
         </div>
-        </div>
+        </div>   
   </body>
 </html>

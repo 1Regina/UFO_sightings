@@ -1,9 +1,14 @@
 .jumbotron {
-  background-color: teal;
-  margin: 10px 10px;
-  border: white solid 10px;
+  background-color: rgb(24, 23, 23);
+  /* margin: 10px 10px; */
+  /* border: white solid 10px; */
+  /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkSPO2lfiemQ9I25I2Yp2m9FW6kXBfEXxp4Q&usqp=CAU'); */
+  background-repeat: no-repeat;
+  /* color:darkgrey; */
+  height:200px;
+  /* background-size: 100%; */
   font-weight: 100;
-  font-family: Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 /* .nav-row {
@@ -12,4 +17,13 @@
 
 .main-column {
   padding-top: 20px;
+}
+
+body {
+  background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA-4tSuDc0E2zhrFlNXaIQimrLLER42a1Ang&usqp=CAU')
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
 }
