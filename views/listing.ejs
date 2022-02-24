@@ -13,7 +13,7 @@
     <%- include('navigator_bar') -%>
         <div class="col-sm-10 text-right">
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             Arrange By
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -32,10 +32,26 @@
             <h1>All UFO Sightings</h1> 
             <br>
             <br>
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Index</th>
+              <th scope="col">Sighted On</th>
+              <th scope="col">City</th>
+              <th scope="col"></th> 
+              <th scope="col">Shape</th>
+              <th scope="col">Record Date</th>      
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+        </table>
+              
             <%let index=data.length %>
             <% for(let i=0; i < index; i +=1) { %>
             <ul>
-             <div class="container">
+             <!-- <div class="container"> -->
              <div class="shadow p-3 mb-5 bg-white rounded">
                 <div class="row">
                   <div class="col-sm-2">
@@ -54,6 +70,12 @@
               <% let shape=data[i].SHAPE.toUpperCase()%>
               <span style="color:rgb(50, 190, 176)" ><%=shape%> </span>
                   </div> 
+            
+                  <div class="col-sm-2">
+              <% let createDate=data[i].CREATED_ON.substr(0,10)%>
+              <span style="color:rgb(50, 190, 176)" ><%=createDate%> </span>
+                  </div> 
+
                   <div class="col-sm-1">
                <% let update_id = `update ${i}` %>
                 <form action="/sighting/<%=i%>/edit" method="GET">
@@ -68,7 +90,7 @@
                   </div>
                 </div>    
              </div>
-             </div>       
+             <!-- </div>        -->
              </ul>
             <% } %>
           </div>  

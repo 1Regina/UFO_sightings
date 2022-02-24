@@ -48,8 +48,11 @@ app.get('/sighting', (request, response) => {
 });
 // Save new sighting data sent via POST request from our form
 app.post('/sighting', (request, response) => {
+  const start = new Date(Date.now());
+  console.log(`start`, start)
   // Add new sighting data in request.body to sightings array in data.json.
   console.log('before added sighting')
+  request.body.CREATED_ON = start
   add('data.json', 'sightings', request.body, (err) => {
     console.log('added sighting')
     if (err) {
