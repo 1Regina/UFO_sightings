@@ -19,7 +19,7 @@
                 <form action="/sighting/<%=ind%>/edit" method="GET">
                 <input type="submit" value="Update" <%=id= update_id %> class="btn btn-dark"/>   
                 </form>   
-                             <% let delete_id = `delete ${ind}` %>
+                   <% let delete_id = `delete ${ind}` %>
                 <form action="/sighting/<%=ind%>/delete?_method=DELETE" method="POST">
                 <input type="submit" value="Delete" <%=id= delete_id %> class="btn btn-dark"/>   
                 </form>
