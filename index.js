@@ -87,7 +87,8 @@ app.get('/sighting/:index', (req,res) =>{
     let ind = req.params.index
     const details = jsonObjContent.sightings[req.params.index]; //ok for original without the edit/delete button
     console.log(`details`, details);
-    res.render(`single_sighting`, {details});
+    res.render(`single_sighting`, {details, ind});
+
     // have to extract at the all sightings level to obtain the req.params.index for the update and delete button.
     // res.render(`single_sighting`, {jsonObjContent.sightings[req.params.index]});
   });
