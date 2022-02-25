@@ -9,11 +9,13 @@
 <body> -->
     <%- include('navigator_bar') -%>
     <div class="container">
-      <h1>All UFO Sightings for Shape of</h1> 
-
-      <% let processedShape = String(sightingsMatchingShape[0].SHAPE).replace(/ /g, "_").toUpperCase()%>
-      <h1 class="text-info"><%=processedShape%></h1>  
-
+        <div class="container">
+          <h1>All UFO Sightings for Shape of</h1> 
+          
+          <% let processedShape = String(sightingsMatchingShape[0].SHAPE).replace(/ /g, "_").toUpperCase()%>
+          <h1 class="text-light bg-dark"><%=processedShape%></h1> 
+           
+        </div> 
 
         <div class="container">
           <div class="d-flex flex-row-reverse">
