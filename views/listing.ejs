@@ -54,18 +54,22 @@
              <!-- <div class="container"> -->
              <div class="shadow p-3 mb-5 bg-white rounded">
                 <div class="row">
+                  
                   <div class="col-sm-2">
               <% let url = `/sighting/${i}` %> <% let text = `Sighting ${i+1}` %>
               <a href="<%=url %>"><%=text %></a>
                   </div> 
+                  
                   <div class="col-sm-2">
               <% let date=data[i].DATE%>
               <span><%=date%></span>
                   </div> 
+                  
                   <div class="col-sm-2">
               <% let city=data[i].CITY.toUpperCase()%>
               <span  style="color:rgb(2, 68, 80)" ><%=city%></span>
                   </div> 
+
                   <div class="col-sm-2">
               <% let shape=data[i].SHAPE.toUpperCase()%>
               <span style="color:rgb(50, 190, 176)" ><%=shape%> </span>
@@ -82,12 +86,14 @@
                 <input type="submit" value="Update" <%=id= update_id %>/>   
                 </form>   
                   </div>      
+
                   <div class="col-sm-1">
               <% let delete_id = `delete ${i}` %>
                 <form action="/sighting/<%=i%>/delete?_method=DELETE" method="POST">
                 <input type="submit" value="Delete" <%=id= delete_id %>/>   
                 </form>   
                   </div>
+                  
                 </div>    
              </div>
              <!-- </div>        -->
