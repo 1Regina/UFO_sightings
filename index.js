@@ -1,6 +1,5 @@
 import express from 'express';
 import read, {add, write} from './jsonFileStorage.js';
-import fs from 'fs';
 import methodOverride from 'method-override';
 
 const app = express();
@@ -82,17 +81,18 @@ app.get('/sighting/:index', (req,res) =>{
   read(`data.json`, (error, jsonObjContent) => {
     if (error) {
       console.error(`read error`, error);
+      res.send('fdsfkjshjdfgjsdg')
       return;
     }
-    let ind = req.params.index
-    const details = jsonObjContent.sightings[req.params.index]; //ok for original without the edit/delete button
+    let { index } = req.params
+    const details = jsonObjContent.sightings[index]; //ok for original without the edit/delete button
     console.log(`details`, details);
-    res.render(`single_sighting`, {details, ind});
-
+    res.render(`single_sighting`, { details: details, ind: index});
+    return;
     // have to extract at the all sightings level to obtain the req.params.index for the update and delete button.
     // res.render(`single_sighting`, {jsonObjContent.sightings[req.params.index]});
   });
-  });
+});
 
 // Display the sighting to edit
 app.get('/sighting/:index/edit', (req,res) =>{
@@ -116,32 +116,24 @@ app.get('/sighting/:index/edit', (req,res) =>{
 });
 
 // Put to post updates to data.json
-app.put('/sighting/:index/edit', (req,res) =>{
-    const {index} = req.params;
-    console.log(`index`, index)
-    read(`data.json`, (error, jsonObjContent) => {
+app.put('/sighting/:index_a/edit', (req,res) => {
+  const {index_a} = req.params;
+  read(`data.json`, (error, jsonObjContent) => {
     if (error) {
       console.error(`read error`, error);
+      res.status(400).send('Read error')
       return;
     };
-    console.log(req.body)
+    // console.log(req.body)
     req.body.SHAPE = req.body.SHAPE.replace(/ /g, "_").toUpperCase()
     req.body.CITY = req.body.CITY.replace(/ /g, "_").toUpperCase()
-    jsonObjContent.sightings[index] = req.body;
-    const details = jsonObjContent.sightings[index];
-    console.log(details)
+    jsonObjContent.sightings[index_a] = req.body;
+    const details = jsonObjContent.sightings[index_a];
     
     write('data.json', jsonObjContent, (err) => {
-    //   // res.send('Done!');
-      res.render(`single_sighting`, {details});
-    //   console.log(`request.body`, req.body)
-    //   // console.log(`index`, index)  
+      res.render(`single_sighting`, {details, ind: index_a});
     });
-    
   });  
-//     // await fs.promises.writeFile("data.json", JSON.stringify(jsonObjContent),{encoding: 'utf8' })
-//     res.render(`single_sighting`, {details} )
-  
 })
 
 // render a summary of shape counter
